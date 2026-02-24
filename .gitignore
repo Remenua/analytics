@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+.vscode/
+.env
+.DS_Store
+tsconfig.tsbuildinfo
+.vite
+.idea/
