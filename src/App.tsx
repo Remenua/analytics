@@ -66,7 +66,10 @@ const initialForest: Forest = [
   makeNode('Северо-западный')
 ];
 
-const findNodeAndParent = (forest: Forest, id: string) => {
+const findNodeAndParent = (
+  forest: Forest,
+  id: string
+): { parent: TreeNode | null; node: TreeNode | null } => {
   let parent: TreeNode | null = null;
   let found: TreeNode | null = null;
   const dfs = (nodes: TreeNode[], p: TreeNode | null): boolean => {
@@ -662,8 +665,11 @@ export default function App() {
   const deleteHasChildren = (deleteNode?.children || []).length > 0;
 
   const reassignOptions = useMemo(() => {
-    if (!deleteDialog.nodeId) return [] as NodeOption[];
-    return listNodeOptions(forest, dims, posFull, deleteDialog.nodeId).filter((o) => !isDescendant(forest, deleteDialog.nodeId, o.id));
+    const deleteNodeId = deleteDialog.nodeId;
+    if (!deleteNodeId) return [] as NodeOption[];
+    return listNodeOptions(forest, dims, posFull, deleteNodeId).filter(
+      (o) => !isDescendant(forest, deleteNodeId, o.id)
+    );
   }, [deleteDialog.nodeId, forest, dims, posFull]);
 
   const showOverlayForNode = (nodeId: string) => {
